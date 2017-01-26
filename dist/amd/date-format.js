@@ -25,11 +25,11 @@ define(['exports', 'moment'], function (exports, _moment) {
       _classCallCheck(this, DateFormatValueConverter);
     }
 
-    DateFormatValueConverter.prototype.toView = function toView(value, format) {
-      if (!value) return value;
+    DateFormatValueConverter.prototype.toView = function toView(dt, format) {
+      if (!dt) return dt;
       if (!format) format = 'M/D/YYYY h:mm a';
 
-      return (0, _moment2.default)(value).format(format);
+      return (0, _moment2.default)(dt).format(format);
     };
 
     DateFormatValueConverter.prototype.fromView = function fromView(strDate) {

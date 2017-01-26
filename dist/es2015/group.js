@@ -1,9 +1,9 @@
 export let GroupValueConverter = class GroupValueConverter {
-  toView(array, groupName) {
-    if (!array || !groupName) return array;
+  toView(array, propertyName) {
+    if (!array || !propertyName) return array;
 
     const groups = {};
-    const parts = groupName.split('.');
+    const parts = propertyName.split('.');
 
     array.forEach(obj => {
       let group = null;

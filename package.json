@@ -55,7 +55,7 @@
       "resources": [
         "aurelia-value-converters/date-format",
         "aurelia-value-converters/sort",
-        "aurelia-chart/attributes/group"
+        "aurelia-value-converters/group"
       ]
     }
   },

@@ -21,11 +21,11 @@ System.register(['moment'], function (_export, _context) {
           _classCallCheck(this, DateFormatValueConverter);
         }
 
-        DateFormatValueConverter.prototype.toView = function toView(value, format) {
-          if (!value) return value;
+        DateFormatValueConverter.prototype.toView = function toView(dt, format) {
+          if (!dt) return dt;
           if (!format) format = 'M/D/YYYY h:mm a';
 
-          return moment(value).format(format);
+          return moment(dt).format(format);
         };
 
         DateFormatValueConverter.prototype.fromView = function fromView(strDate) {

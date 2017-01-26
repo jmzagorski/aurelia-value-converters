@@ -1,11 +1,11 @@
 import moment from 'moment';
 
 export let DateFormatValueConverter = class DateFormatValueConverter {
-  toView(value, format) {
-    if (!value) return value;
+  toView(dt, format) {
+    if (!dt) return dt;
     if (!format) format = 'M/D/YYYY h:mm a';
 
-    return moment(value).format(format);
+    return moment(dt).format(format);
   }
 
   fromView(strDate) {

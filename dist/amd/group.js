@@ -16,11 +16,11 @@ define(['exports'], function (exports) {
       _classCallCheck(this, GroupValueConverter);
     }
 
-    GroupValueConverter.prototype.toView = function toView(array, groupName) {
-      if (!array || !groupName) return array;
+    GroupValueConverter.prototype.toView = function toView(array, propertyName) {
+      if (!array || !propertyName) return array;
 
       var groups = {};
-      var parts = groupName.split('.');
+      var parts = propertyName.split('.');
 
       array.forEach(function (obj) {
         var group = null;
