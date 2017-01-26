@@ -50,6 +50,15 @@
     "vinyl-paths": "^2.1.0",
     "yargs": "^6.5.0"
   },
+  "aurelia": {
+    "build": {
+      "resources": [
+        "aurelia-value-converters/date-format",
+        "aurelia-value-converters/sort",
+        "aurelia-chart/attributes/group"
+      ]
+    }
+  },
   "jspm": {
     "registry": "npm",
     "main": "index",
