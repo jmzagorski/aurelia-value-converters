@@ -1,4 +1,4 @@
-define(['exports'], function (exports) {
+define(['exports', 'aurelia-pal'], function (exports, _aureliaPal) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -6,6 +6,6 @@ define(['exports'], function (exports) {
   });
   exports.configure = configure;
   function configure(aurelia) {
-    aurelia.globalResources('./date-format', './sort', './group');
+    aurelia.globalResources(_aureliaPal.PLATFORM.moduleName('./date-format'), _aureliaPal.PLATFORM.moduleName('./sort'), _aureliaPal.PLATFORM.moduleName('./group'));
   }
 });

@@ -1,3 +1,5 @@
+import { PLATFORM } from 'aurelia-pal';
+
 export function configure(aurelia) {
-  aurelia.globalResources('./date-format', './sort', './group');
+  aurelia.globalResources(PLATFORM.moduleName('./date-format'), PLATFORM.moduleName('./sort'), PLATFORM.moduleName('./group'));
 }
