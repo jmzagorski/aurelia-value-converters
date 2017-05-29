@@ -1,5 +1,4 @@
 import {SortValueConverter} from '../src/sort';
-import using from 'jasmine-data-provider';
 
 describe('the sort value converter', () => {
   let sut;
@@ -8,11 +7,10 @@ describe('the sort value converter', () => {
     sut = new SortValueConverter();
   });
 
-  using([
-    null,
+  [ null,
     undefined,
     []
-  ], array => {
+  ].forEach(array => {
     it('does not throw with no array', () => {
       const ex = () => sut.toView(array);
 
@@ -20,11 +18,10 @@ describe('the sort value converter', () => {
     });
   });
 
-  using([
-    {propName: null, unsorted: [6, 1, 2], sorted: [1, 2, 6]},
+  [ {propName: null, unsorted: [6, 1, 2], sorted: [1, 2, 6]},
     {propName: undefined, unsorted: [6, 1, 2], sorted: [1, 2, 6]},
     {propName: '', unsorted: [6, 1, 2], sorted: [1, 2, 6]}
-  ], data => {
+  ].forEach(data => {
     it('sorts an array when no property name given', () => {
       const sorted = sut.toView(data.unsorted, data.propName);
 
@@ -32,13 +29,12 @@ describe('the sort value converter', () => {
     });
   });
 
-  using([
-    {dir: 'asc', unsorted: [{id: 3}, {id: 1}, {id: 2} ], sorted: [{id: 1}, {id: 2}, {id: 3}]},
+  [ {dir: 'asc', unsorted: [{id: 3}, {id: 1}, {id: 2} ], sorted: [{id: 1}, {id: 2}, {id: 3}]},
     {dir: '', unsorted: [{id: 3}, {id: 1}, {id: 2} ], sorted: [{id: 1}, {id: 2}, {id: 3}]},
     {dir: null, unsorted: [{id: 3}, {id: 1}, {id: 2} ], sorted: [{id: 1}, {id: 2}, {id: 3}]},
     {dir: undefined, unsorted: [{id: 3}, {id: 1}, {id: 2} ], sorted: [{id: 1}, {id: 2}, {id: 3}]},
     {dir: 'desc', unsorted: [{id: 3}, {id: 1}, {id: 2} ], sorted: [{id: 3}, {id: 2}, {id: 1}]}
-  ], data => {
+  ].forEach(data => {
     it('sorts an number property', () => {
       const sorted = sut.toView(data.unsorted, 'id', data.dir);
 
@@ -48,10 +44,9 @@ describe('the sort value converter', () => {
 
   // don't need to test different asc dir args since that was tested with the
   // number test above
-  using([
-    {dir: 'asc', unsorted: [{id: 'c'}, {id: 'a'}, {id: 'b'} ], sorted: [{id: 'a'}, {id: 'b'}, {id: 'c'}]},
+  [ {dir: 'asc', unsorted: [{id: 'c'}, {id: 'a'}, {id: 'b'} ], sorted: [{id: 'a'}, {id: 'b'}, {id: 'c'}]},
     {dir: 'desc', unsorted: [{id: 'c'}, {id: 'a'}, {id: 'b'} ], sorted: [{id: 'c'}, {id: 'b'}, {id: 'a'}]}
-  ], data => {
+  ].forEach(data => {
     it('sorts an string property', () => {
       const sorted = sut.toView(data.unsorted, 'id', data.dir);
 
@@ -67,8 +62,7 @@ describe('the sort value converter', () => {
     expect(actualSort).toEqual(expectSort);
   });
 
-  using([
-    {
+  [ {
       dir: 'asc',
       unsorted: [{id: new Date(2012, 1, 6)}, {id: new Date(2011, 2, 5)}, {id: new Date(2012, 1, 1)} ],
       sorted: [{id: new Date(2011, 2, 5)}, {id: new Date(2012, 1, 1)}, {id: new Date(2012, 1, 6)}]
@@ -78,7 +72,7 @@ describe('the sort value converter', () => {
       unsorted: [{id: new Date(2012, 1, 6)}, {id: new Date(2011, 2, 5)}, {id: new Date(2012, 1, 1)} ],
       sorted: [{id: new Date(2012, 1, 6)}, {id: new Date(2012, 1, 1)}, {id: new Date(2011, 2, 5)}]
     }
-  ], data => {
+  ].forEach(data => {
     it('sorts an date property', () => {
       const sorted = sut.toView(data.unsorted, 'id', data.dir);
 

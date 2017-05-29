@@ -1,5 +1,4 @@
 import {GroupValueConverter} from '../src/group';
-import using from 'jasmine-data-provider';
 
 describe('the group by value converter', () => {
   let sut;
@@ -9,13 +8,13 @@ describe('the group by value converter', () => {
     sut = new GroupValueConverter();
   });
 
-  using(undefinedData, val => {
+  undefinedData.forEach(val => {
     it('does nothing when no array is passed', () => {
       expect(() => sut.toView(val, 'g')).not.toThrow();
     });
   });
 
-  using(undefinedData, val => {
+  undefinedData.forEach(val => {
     it('does nothing when no group by is passed', () => {
       expect(() => sut.toView([], val)).not.toThrow();
     });
