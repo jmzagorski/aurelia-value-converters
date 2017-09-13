@@ -9,7 +9,7 @@ var args = require('../args');
 // utilizes the bump plugin to bump the
 // semver for the repo
 gulp.task('bump-version', function() {
-  return gulp.src(['./package.json'])
+  return gulp.src(['./package.json', './package-lock.json'])
     .pipe(bump({type: args.bump})) //major|minor|patch|prerelease
     .pipe(gulp.dest('./'));
 });
@@ -34,6 +34,7 @@ gulp.task('prepare-release', function(callback) {
   return runSequence(
     'build',
     'lint',
+    'test',
     'bump-version',
     'changelog',
     callback
