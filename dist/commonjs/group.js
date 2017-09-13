@@ -34,7 +34,13 @@ var GroupValueConverter = exports.GroupValueConverter = function () {
 
         var p = _ref;
 
-        group = typeof obj[p] === 'undefined' ? group[p] : obj[p];
+        if (isMissing(obj[p]) && !isMissing(group)) {
+          group = group[p];
+        } else if (!isMissing(obj[p])) {
+          group = obj[p];
+        } else {
+          group = '';
+        }
       }
 
       groups[group] = groups[group] || [];
@@ -51,3 +57,7 @@ var GroupValueConverter = exports.GroupValueConverter = function () {
 
   return GroupValueConverter;
 }();
+
+function isMissing(val) {
+  return val === null || typeof val === 'undefined';
+}

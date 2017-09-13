@@ -39,7 +39,13 @@ define(['exports'], function (exports) {
 
           var p = _ref;
 
-          group = typeof obj[p] === 'undefined' ? group[p] : obj[p];
+          if (isMissing(obj[p]) && !isMissing(group)) {
+            group = group[p];
+          } else if (!isMissing(obj[p])) {
+            group = obj[p];
+          } else {
+            group = '';
+          }
         }
 
         groups[group] = groups[group] || [];
@@ -56,4 +62,8 @@ define(['exports'], function (exports) {
 
     return GroupValueConverter;
   }();
+
+  function isMissing(val) {
+    return val === null || typeof val === 'undefined';
+  }
 });

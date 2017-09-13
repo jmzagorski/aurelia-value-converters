@@ -11,6 +11,9 @@ System.register([], function (_export, _context) {
     }
   }
 
+  function isMissing(val) {
+    return val === null || typeof val === 'undefined';
+  }
   return {
     setters: [],
     execute: function () {
@@ -42,7 +45,13 @@ System.register([], function (_export, _context) {
 
               var p = _ref;
 
-              group = typeof obj[p] === 'undefined' ? group[p] : obj[p];
+              if (isMissing(obj[p]) && !isMissing(group)) {
+                group = group[p];
+              } else if (!isMissing(obj[p])) {
+                group = obj[p];
+              } else {
+                group = '';
+              }
             }
 
             groups[group] = groups[group] || [];

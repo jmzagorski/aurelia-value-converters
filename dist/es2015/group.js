@@ -9,7 +9,13 @@ export let GroupValueConverter = class GroupValueConverter {
       let group = null;
 
       for (let p of parts) {
-        group = typeof obj[p] === 'undefined' ? group[p] : obj[p];
+        if (isMissing(obj[p]) && !isMissing(group)) {
+          group = group[p];
+        } else if (!isMissing(obj[p])) {
+          group = obj[p];
+        } else {
+          group = '';
+        }
       }
 
       groups[group] = groups[group] || [];
@@ -24,3 +30,7 @@ export let GroupValueConverter = class GroupValueConverter {
     });
   }
 };
+
+function isMissing(val) {
+  return val === null || typeof val === 'undefined';
+}
