@@ -28,16 +28,22 @@ describe('the group by value converter', () => {
       { id: 2, group: 'a'},
       { id: 3, group: null },
       { id: 4, group: false },
-      { id: 5, group: '' }
+      { id: 5, group: '' },
+      { id: 6 },
+      { id: 7, group: undefined }
     ];
 
     const grouped = sut.toView(array, 'group');
 
     expect(grouped).toEqual([
       { group: 'a', values: [{ id: 1, group: 'a'}, { id: 2, group: 'a'}] },
-      { group: 'null', values: [{ id: 3, group: null}] },
-      { group: 'false', values: [{ id: 4, group: false}] },
-      { group: '', values: [{ id: 5, group: ''}] }
+      { group: '', values: [
+        { id: 3, group: null },
+        { id: 5,  group: '' },
+        { id: 6 },
+        { id: 7, group: undefined }
+      ]},
+      { group: 'false', values: [{ id: 4, group: false}] }
     ]);
   });
 

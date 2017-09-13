@@ -16,7 +16,13 @@ export class GroupValueConverter {
 
       // allow grouping on null, empty string, false
       for (let p of parts) {
-        group = typeof obj[p] === 'undefined' ? group[p] : obj[p];
+        if (isMissing(obj[p]) && !isMissing(group)) {
+          group = group[p];
+        } else if (!isMissing(obj[p])) {
+          group = obj[p];
+        } else {
+          group = '';
+        }
       }
 
       groups[group] = groups[group] || [];
@@ -31,4 +37,8 @@ export class GroupValueConverter {
       };
     });
   }
+}
+
+function isMissing(val) {
+  return val === null || typeof val === 'undefined';
 }
