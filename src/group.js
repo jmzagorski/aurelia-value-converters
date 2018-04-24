@@ -1,3 +1,5 @@
+import { getObjectValue } from './utils';
+
 export class GroupValueConverter {
   /**
    * @desc Groups the array by the property name
@@ -8,22 +10,12 @@ export class GroupValueConverter {
     if (!array || !propertyName) return array;
 
     const groups = { };
-    const parts = propertyName.split('.');
 
     // create the groups
     array.forEach(obj => {
-      let group = null;
+      let group = getObjectValue(obj, propertyName);
 
-      // allow grouping on null, empty string, false
-      for (let p of parts) {
-        if (isMissing(obj[p]) && !isMissing(group)) {
-          group = group[p];
-        } else if (!isMissing(obj[p])) {
-          group = obj[p];
-        } else {
-          group = '';
-        }
-      }
+      if (isMissing(group)) group = '';
 
       groups[group] = groups[group] || [];
       groups[group].push(obj);

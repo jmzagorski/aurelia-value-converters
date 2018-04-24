@@ -82,15 +82,15 @@ describe('the sort value converter', () => {
 
   it('sorts a nested property', () => {
     const unsorted = [
-      { nested: { a: new Date(2015, 9, 2) } },
-      { nested: { a: new Date(2014, 9, 2) } }
+      { a: 1, nested: { a: new Date(2015, 9, 2) } },
+      { a: 2, nested: { a: new Date(2014, 9, 2) } }
     ];
 
     const sorted = sut.toView(unsorted, 'nested.a');
 
     expect(sorted).toEqual([
-      { nested: { a: new Date(2014, 9, 2) } },
-      { nested: { a: new Date(2015, 9, 2) } }
+      { a: 2, nested: { a: new Date(2014, 9, 2) } },
+      { a: 1, nested: { a: new Date(2015, 9, 2) } }
     ]);
   });
 });

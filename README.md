@@ -6,6 +6,7 @@
 * [Sort](#sort)
 * [Group](#group)
 * [DateFormat](#dateformat)
+* [Setup](#setup)
 
 ## Summary
 A package full of common value converters used across my projects
@@ -29,7 +30,7 @@ export function configure(aurelia) {
 ```
 
 ## Sort
-
+#### Dependencies (lodash.topath)
 sort by a property named requested
 ```
   <!-- Ascending order -->
@@ -43,6 +44,7 @@ sort by a property named requested
 ```
 
 ## Group
+#### Dependencies (lodash.topath)
 group by a property named requested (nested properties supported too)
 ```
   <div repeat.for="grp of requests | group:'dateGroup'">
@@ -59,4 +61,14 @@ group by a property named requested (nested properties supported too)
 moment date formats are supported
 ```
   <span>${date | dateFormat: format || 'MM/DD/YYYY'}</span>
+```
+
+## Setup
+```
+  git clone https://github.com/jmzagorski/aurelia-value-converters.git
+  cd aurelia-value-converters
+  npm i
+  node_modules/.bin/jspm install
+  // do work
+  node_modules/.bin/jspm test
 ```

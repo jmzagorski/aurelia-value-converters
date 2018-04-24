@@ -1,4 +1,5 @@
 import moment from 'moment';
+import topath from 'lodash.topath';
 
 /**
  * Compares two dates (Date objects or strings).
@@ -18,4 +19,23 @@ export function isDate(val) {
 
 export function isString(val) {
   return typeof val === 'string';
+}
+
+export function getObjectValue(obj, propertyPath) {
+  if (!obj) {
+    throw new Error('Must provide an object to get the value');
+  }
+  if (!propertyPath) {
+    return obj;
+  }
+
+  const paths = topath(propertyPath);
+  const length = paths.length;
+
+  let result = obj;
+  for (let i = 0; i < length && result; ++i) {
+    result = result[paths[i]];
+  }
+
+  return result;
 }
