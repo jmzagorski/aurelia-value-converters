@@ -1,4 +1,4 @@
-define(['exports', 'moment'], function (exports, _moment) {
+define(['exports', 'moment', 'lodash.topath'], function (exports, _moment, _lodash) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -7,8 +7,11 @@ define(['exports', 'moment'], function (exports, _moment) {
   exports.dateComparison = dateComparison;
   exports.isDate = isDate;
   exports.isString = isString;
+  exports.getObjectValue = getObjectValue;
 
   var _moment2 = _interopRequireDefault(_moment);
+
+  var _lodash2 = _interopRequireDefault(_lodash);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -28,5 +31,24 @@ define(['exports', 'moment'], function (exports, _moment) {
 
   function isString(val) {
     return typeof val === 'string';
+  }
+
+  function getObjectValue(obj, propertyPath) {
+    if (!obj) {
+      throw new Error('Must provide an object to get the value');
+    }
+    if (!propertyPath) {
+      return obj;
+    }
+
+    var paths = (0, _lodash2.default)(propertyPath);
+    var length = paths.length;
+
+    var result = obj;
+    for (var i = 0; i < length && result; ++i) {
+      result = result[paths[i]];
+    }
+
+    return result;
   }
 });

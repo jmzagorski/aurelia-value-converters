@@ -1,3 +1,4 @@
+import { getObjectValue } from './utils';
 import { dateComparison, isDate, isString } from './utils.js';
 
 function _isDesc(direction) {
@@ -10,16 +11,10 @@ export let SortValueConverter = class SortValueConverter {
 
     const isDesc = _isDesc(direction || 'asc');
     const factor = isDesc ? -1 : 1;
-    const parts = propertyName ? propertyName.split('.') : [];
 
     return array.slice(0).sort((a, b) => {
-      let aProp = a;
-      let bProp = b;
-
-      for (let p of parts) {
-        aProp = a[p] || aProp[p];
-        bProp = b[p] || bProp[p];
-      }
+      let aProp = getObjectValue(a, propertyName);
+      let bProp = getObjectValue(b, propertyName);
 
       if (isDate(aProp) && isDate(bProp)) {
         return dateComparison(aProp, bProp) * factor;

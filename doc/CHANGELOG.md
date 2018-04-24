@@ -1,3 +1,13 @@
+<a name="1.0.6"></a>
+## [1.0.6](https://github.com/jmzagorski/aurelia-value-converters/compare/v1.0.5...v1.0.6) (2018-04-24)
+
+
+### Bug Fixes
+
+* add lodash.path to handle nested path ([1adc782](https://github.com/jmzagorski/aurelia-value-converters/commit/1adc782))
+
+
+
 <a name="1.0.5"></a>
 ## [1.0.5](https://github.com/jmzagorski/aurelia-value-converters/compare/v1.0.4...v1.0.5) (2017-09-13)
 

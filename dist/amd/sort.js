@@ -1,4 +1,4 @@
-define(['exports', './utils.js'], function (exports, _utils) {
+define(['exports', './utils', './utils.js'], function (exports, _utils, _utils2) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -26,36 +26,17 @@ define(['exports', './utils.js'], function (exports, _utils) {
 
       var isDesc = _isDesc(direction || 'asc');
       var factor = isDesc ? -1 : 1;
-      var parts = propertyName ? propertyName.split('.') : [];
 
       return array.slice(0).sort(function (a, b) {
-        var aProp = a;
-        var bProp = b;
+        var aProp = (0, _utils.getObjectValue)(a, propertyName);
+        var bProp = (0, _utils.getObjectValue)(b, propertyName);
 
-        for (var _iterator = parts, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-          var _ref;
-
-          if (_isArray) {
-            if (_i >= _iterator.length) break;
-            _ref = _iterator[_i++];
-          } else {
-            _i = _iterator.next();
-            if (_i.done) break;
-            _ref = _i.value;
-          }
-
-          var p = _ref;
-
-          aProp = a[p] || aProp[p];
-          bProp = b[p] || bProp[p];
+        if ((0, _utils2.isDate)(aProp) && (0, _utils2.isDate)(bProp)) {
+          return (0, _utils2.dateComparison)(aProp, bProp) * factor;
         }
 
-        if ((0, _utils.isDate)(aProp) && (0, _utils.isDate)(bProp)) {
-          return (0, _utils.dateComparison)(aProp, bProp) * factor;
-        }
-
-        if ((0, _utils.isString)(aProp)) aProp = aProp.toLowerCase();
-        if ((0, _utils.isString)(bProp)) bProp = bProp.toLowerCase();
+        if ((0, _utils2.isString)(aProp)) aProp = aProp.toLowerCase();
+        if ((0, _utils2.isString)(bProp)) bProp = bProp.toLowerCase();
 
         return (aProp > bProp ? 1 : -1) * factor;
       });

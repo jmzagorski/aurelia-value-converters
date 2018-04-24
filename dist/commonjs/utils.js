@@ -6,10 +6,15 @@ Object.defineProperty(exports, "__esModule", {
 exports.dateComparison = dateComparison;
 exports.isDate = isDate;
 exports.isString = isString;
+exports.getObjectValue = getObjectValue;
 
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
+
+var _lodash = require('lodash.topath');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,4 +30,23 @@ function isDate(val) {
 
 function isString(val) {
   return typeof val === 'string';
+}
+
+function getObjectValue(obj, propertyPath) {
+  if (!obj) {
+    throw new Error('Must provide an object to get the value');
+  }
+  if (!propertyPath) {
+    return obj;
+  }
+
+  var paths = (0, _lodash2.default)(propertyPath);
+  var length = paths.length;
+
+  var result = obj;
+  for (var i = 0; i < length && result; ++i) {
+    result = result[paths[i]];
+  }
+
+  return result;
 }

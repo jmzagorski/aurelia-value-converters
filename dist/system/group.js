@@ -1,9 +1,9 @@
 'use strict';
 
-System.register([], function (_export, _context) {
+System.register(['./utils'], function (_export, _context) {
   "use strict";
 
-  var GroupValueConverter;
+  var getObjectValue, GroupValueConverter;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -15,7 +15,9 @@ System.register([], function (_export, _context) {
     return val === null || typeof val === 'undefined';
   }
   return {
-    setters: [],
+    setters: [function (_utils) {
+      getObjectValue = _utils.getObjectValue;
+    }],
     execute: function () {
       _export('GroupValueConverter', GroupValueConverter = function () {
         function GroupValueConverter() {
@@ -26,33 +28,11 @@ System.register([], function (_export, _context) {
           if (!array || !propertyName) return array;
 
           var groups = {};
-          var parts = propertyName.split('.');
 
           array.forEach(function (obj) {
-            var group = null;
+            var group = getObjectValue(obj, propertyName);
 
-            for (var _iterator = parts, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-              var _ref;
-
-              if (_isArray) {
-                if (_i >= _iterator.length) break;
-                _ref = _iterator[_i++];
-              } else {
-                _i = _iterator.next();
-                if (_i.done) break;
-                _ref = _i.value;
-              }
-
-              var p = _ref;
-
-              if (isMissing(obj[p]) && !isMissing(group)) {
-                group = group[p];
-              } else if (!isMissing(obj[p])) {
-                group = obj[p];
-              } else {
-                group = '';
-              }
-            }
+            if (isMissing(group)) group = '';
 
             groups[group] = groups[group] || [];
             groups[group].push(obj);

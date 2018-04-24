@@ -1,22 +1,15 @@
+import { getObjectValue } from './utils';
+
 export let GroupValueConverter = class GroupValueConverter {
   toView(array, propertyName) {
     if (!array || !propertyName) return array;
 
     const groups = {};
-    const parts = propertyName.split('.');
 
     array.forEach(obj => {
-      let group = null;
+      let group = getObjectValue(obj, propertyName);
 
-      for (let p of parts) {
-        if (isMissing(obj[p]) && !isMissing(group)) {
-          group = group[p];
-        } else if (!isMissing(obj[p])) {
-          group = obj[p];
-        } else {
-          group = '';
-        }
-      }
+      if (isMissing(group)) group = '';
 
       groups[group] = groups[group] || [];
       groups[group].push(obj);

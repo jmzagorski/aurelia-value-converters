@@ -3,6 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.GroupValueConverter = undefined;
+
+var _utils = require('./utils');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15,33 +18,11 @@ var GroupValueConverter = exports.GroupValueConverter = function () {
     if (!array || !propertyName) return array;
 
     var groups = {};
-    var parts = propertyName.split('.');
 
     array.forEach(function (obj) {
-      var group = null;
+      var group = (0, _utils.getObjectValue)(obj, propertyName);
 
-      for (var _iterator = parts, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
-
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
-        } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
-        }
-
-        var p = _ref;
-
-        if (isMissing(obj[p]) && !isMissing(group)) {
-          group = group[p];
-        } else if (!isMissing(obj[p])) {
-          group = obj[p];
-        } else {
-          group = '';
-        }
-      }
+      if (isMissing(group)) group = '';
 
       groups[group] = groups[group] || [];
       groups[group].push(obj);

@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['moment'], function (_export, _context) {
+System.register(['moment', 'lodash.topath'], function (_export, _context) {
   "use strict";
 
-  var moment;
+  var moment, topath;
   function dateComparison(a, b) {
     if (a === null) a = new Date(1900, 0, 1);
     if (b === null) b = new Date(1900, 0, 1);
@@ -24,9 +24,32 @@ System.register(['moment'], function (_export, _context) {
 
   _export('isString', isString);
 
+  function getObjectValue(obj, propertyPath) {
+    if (!obj) {
+      throw new Error('Must provide an object to get the value');
+    }
+    if (!propertyPath) {
+      return obj;
+    }
+
+    var paths = topath(propertyPath);
+    var length = paths.length;
+
+    var result = obj;
+    for (var i = 0; i < length && result; ++i) {
+      result = result[paths[i]];
+    }
+
+    return result;
+  }
+
+  _export('getObjectValue', getObjectValue);
+
   return {
     setters: [function (_moment) {
       moment = _moment.default;
+    }, function (_lodashTopath) {
+      topath = _lodashTopath.default;
     }],
     execute: function () {}
   };
