@@ -7,10 +7,10 @@ System.config({
   },
 
   map: {
-    "aurelia-pal": "npm:aurelia-pal@1.3.0",
-    "aurelia-polyfills": "npm:aurelia-polyfills@1.1.1",
+    "aurelia-pal": "npm:aurelia-pal@1.8.0",
+    "aurelia-polyfills": "npm:aurelia-polyfills@1.3.0",
     "lodash.topath": "npm:lodash.topath@4.5.2",
-    "moment": "npm:moment@2.17.1",
+    "moment": "npm:moment@2.22.2",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
     },
@@ -32,12 +32,12 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "util": "npm:util@0.10.3"
     },
-    "npm:aurelia-polyfills@1.1.1": {
-      "aurelia-pal": "npm:aurelia-pal@1.3.0"
+    "npm:aurelia-polyfills@1.3.0": {
+      "aurelia-pal": "npm:aurelia-pal@1.8.0"
     },
     "npm:buffer@5.1.0": {
       "base64-js": "npm:base64-js@1.3.0",
-      "ieee754": "npm:ieee754@1.1.11"
+      "ieee754": "npm:ieee754@1.1.12"
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"

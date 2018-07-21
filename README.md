@@ -70,5 +70,5 @@ moment date formats are supported
   npm i
   node_modules/.bin/jspm install
   // do work
-  node_modules/.bin/jspm test
+  node_modules/.bin/gulp test
 ```
